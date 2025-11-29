@@ -1,0 +1,12 @@
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# macOS folder
+.DS_Store/
+
+# ide folders
+.idea/
+.vscode/
