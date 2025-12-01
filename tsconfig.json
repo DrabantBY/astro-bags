@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "@components/*": ["./src/components/*"],
+      "@templates/*": ["./src/components/templates/*"],
       "@layouts/*": ["./src/layouts/*"]
     }
   },
