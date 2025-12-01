@@ -7,8 +7,8 @@ import Head from "@templates/Head.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Astro-Bags</title>
     <Head />
   </head>
@@ -25,19 +25,27 @@ import Head from "@templates/Head.astro";
   :root {
     box-sizing: border-box;
     scroll-behavior: smooth;
-    //scrollbar-width: none;
+    /*scrollbar-width: none;*/
     interpolate-size: allow-keywords;
     user-select: none;
   }
 
   @custom-media --mobile (width < 428px);
-  @custom-media --tablet-sm (427px < width < 576px);
-  @custom-media --tablet-md (575px < width < 768px);
-  @custom-media --tablet-lg (767px < width < 992px);
-  @custom-media --laptop-sm (991px < width < 1280px);
-  @custom-media --laptop-md (1279px < width < 1440px);
-  @custom-media --laptop-lg (1439px < width < 1686px);
+  @custom-media --tablet-sm (width > 427px);
+  @custom-media --tablet-md (width > 575px);
+  @custom-media --tablet-lg (width > 767px);
+  @custom-media --laptop-sm (width > 991px);
+  @custom-media --laptop-md (width > 1279px);
+  @custom-media --laptop-lg (width > 1439px);
   @custom-media --desktop (width > 1685px);
+
+  @font-face {
+    font-family: "iconfont";
+    src: url("../assets/fonts/icons.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
 
   *,
   *::before,
@@ -193,5 +201,66 @@ import Head from "@templates/Head.astro";
     @media (--desktop) {
       padding-inline: 100px;
     }
+  }
+
+  [class^="icon-"]::before {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "iconfont" !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .icon-login::before {
+    content: "\e900";
+  }
+  .icon-search::before {
+    content: "\e901";
+  }
+  .icon-bag::before {
+    content: "\e902";
+  }
+  .icon-burger::before {
+    content: "\e903";
+  }
+  .icon-filter::before {
+    content: "\e904";
+  }
+  .icon-sort::before {
+    content: "\e905";
+  }
+  .icon-tick::before {
+    content: "\e906";
+  }
+  .icon-mark::before {
+    content: "\e907";
+  }
+  .icon-remove::before {
+    content: "\e908";
+  }
+  .icon-arrow-right::before {
+    content: "\e909";
+  }
+  .icon-arrow-left::before {
+    content: "\e90a";
+  }
+  .icon-down::before {
+    content: "\e90b";
+  }
+  .icon-show::before {
+    content: "\e90c";
+  }
+  .icon-hide::before {
+    content: "\e90d";
+  }
+  .icon-calendar::before {
+    content: "\e90e";
   }
 </style>
