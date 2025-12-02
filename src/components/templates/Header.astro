@@ -1,17 +1,13 @@
 ---
-import { Image } from "astro:assets";
-import logoIcon from "../../assets/logo.png";
+import Logo from "@templates/Logo.astro";
+import NavMenu from "@templates/NavMenu.astro";
 ---
 
 <header>
   <div class="__container">
     <ul>
       <li>
-        <button
-          class="icon-burger"
-          type="button"
-          popovertarget="burger-menu"
-          popovertargetaction="show"></button>
+        <NavMenu />
       </li>
 
       <li>
@@ -19,14 +15,7 @@ import logoIcon from "../../assets/logo.png";
       </li>
 
       <li>
-        <a class="logo">
-          <Image
-            src={logoIcon}
-            alt="logo picture"
-            widths={[120, logoIcon.width]}
-            sizes={`(max-width: 767px) 120px, ${logoIcon.width}px`}
-          />
-        </a>
+        <Logo />
       </li>
 
       <li>
@@ -66,18 +55,16 @@ import logoIcon from "../../assets/logo.png";
     align-items: center;
     justify-content: center;
     gap: 10px;
+
+    &:hover {
+      color: var(--secondary-black);
+    }
   }
 
-  li:has(.logo) {
+  li:has(> a > img) {
     flex-grow: 1;
     display: grid;
     place-items: center;
-  }
-
-  .logo > img {
-    display: block;
-    inline-size: 120px;
-    block-size: 13px;
   }
 
   @media (--tablet-lg) {
@@ -89,18 +76,10 @@ import logoIcon from "../../assets/logo.png";
       gap: 32px;
     }
 
-    li > .icon-burger::after,
-    li > .icon-search::after {
-      transform: translateY(2px);
-      font-size: 14px;
-    }
-
-    li > .icon-burger::after {
-      content: "MENU";
-    }
-
     li > .icon-search::after {
       content: "SEARCH";
+      transform: translateY(2px);
+      font-size: 14px;
     }
 
     li:has(.icon-burger) {
@@ -113,15 +92,6 @@ import logoIcon from "../../assets/logo.png";
 
     li:has(.icon-bag) {
       order: 2;
-    }
-
-    .icon-burger {
-      font-size: 24px;
-    }
-
-    .logo > img {
-      inline-size: 300px;
-      block-size: 33px;
     }
   }
 </style>
