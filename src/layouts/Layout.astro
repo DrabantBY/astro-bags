@@ -1,5 +1,6 @@
 ---
 import Head from "@templates/Head.astro";
+import Header from "@templates/Header.astro";
 ---
 
 <!doctype html>
@@ -14,6 +15,7 @@ import Head from "@templates/Head.astro";
   </head>
   <body>
     <div id="root">
+      <Header />
       <main id="main">
         <slot />
       </main>
@@ -28,16 +30,9 @@ import Head from "@templates/Head.astro";
     /*scrollbar-width: none;*/
     interpolate-size: allow-keywords;
     user-select: none;
-  }
 
-  @custom-media --mobile (width < 428px);
-  @custom-media --tablet-sm (width > 427px);
-  @custom-media --tablet-md (width > 575px);
-  @custom-media --tablet-lg (width > 767px);
-  @custom-media --laptop-sm (width > 991px);
-  @custom-media --laptop-md (width > 1279px);
-  @custom-media --laptop-lg (width > 1439px);
-  @custom-media --desktop (width > 1685px);
+    --primary-terracota: #8d402d;
+  }
 
   @font-face {
     font-family: "iconfont";

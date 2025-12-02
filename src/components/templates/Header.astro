@@ -1,0 +1,127 @@
+---
+import { Image } from "astro:assets";
+import logoIcon from "../../assets/logo.png";
+---
+
+<header>
+  <div class="__container">
+    <ul>
+      <li>
+        <button
+          class="icon-burger"
+          type="button"
+          popovertarget="burger-menu"
+          popovertargetaction="show"></button>
+      </li>
+
+      <li>
+        <a class="icon-login" href="/login"></a>
+      </li>
+
+      <li>
+        <a class="logo">
+          <Image
+            src={logoIcon}
+            alt="logo picture"
+            widths={[120, logoIcon.width]}
+            sizes={`(max-width: 767px) 120px, ${logoIcon.width}px`}
+          />
+        </a>
+      </li>
+
+      <li>
+        <button
+          class="icon-search"
+          type="button"
+          popovertarget="search-field"
+          popovertargetaction="toggle"></button>
+      </li>
+      <li>
+        <a class="icon-bag" href="/cart"></a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  header {
+    min-block-size: 74px;
+    padding-block: 8px;
+    align-content: center;
+    color: var(--primary-terracota);
+    border-bottom: 1px solid currentColor;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  li > [class^="icon-"] {
+    block-size: 24px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  li:has(.logo) {
+    flex-grow: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .logo > img {
+    display: block;
+    inline-size: 120px;
+    block-size: 13px;
+  }
+
+  @media (--tablet-lg) {
+    header {
+      min-block-size: 100px;
+    }
+
+    ul {
+      gap: 32px;
+    }
+
+    li > .icon-burger::after,
+    li > .icon-search::after {
+      transform: translateY(2px);
+      font-size: 14px;
+    }
+
+    li > .icon-burger::after {
+      content: "MENU";
+    }
+
+    li > .icon-search::after {
+      content: "SEARCH";
+    }
+
+    li:has(.icon-burger) {
+      inline-size: 192px;
+    }
+
+    li:has(.icon-login) {
+      order: 1;
+    }
+
+    li:has(.icon-bag) {
+      order: 2;
+    }
+
+    .icon-burger {
+      font-size: 24px;
+    }
+
+    .logo > img {
+      inline-size: 300px;
+      block-size: 33px;
+    }
+  }
+</style>
