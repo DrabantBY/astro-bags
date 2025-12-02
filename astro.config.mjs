@@ -30,10 +30,7 @@ export default defineConfig({
         provider: "local",
         variants: [
           {
-            src: [
-              "./src/assets/fonts/Flecha.woff2",
-              "./src/assets/fonts/Flecha.woff",
-            ],
+            src: ["./src/assets/fonts/FlechaBronzeaL-Light.otf"],
           },
         ],
       },
