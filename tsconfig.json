@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
     "paths": {
+      "@core/*": ["./src/core/*"],
+      "@const/*": ["./src/const/*"],
+      "@layouts/*": ["./src/layouts/*"],
       "@templates/*": ["./src/components/templates/*"],
-      "@layouts/*": ["./src/layouts/*"]
-    }
+      "@forms/*": ["./src/solidjs/forms/*"]
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
   },
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
