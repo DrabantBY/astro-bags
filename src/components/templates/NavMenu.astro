@@ -1,3 +1,9 @@
+---
+import { NAV_MENU, SOCIAL_LIST } from "@const/index";
+
+const { pathname } = Astro.url;
+---
+
 <button
   class="icon-burger"
   type="button"
@@ -9,31 +15,25 @@
     <button type="button" command="close" commandfor="nav-menu">CLOSE</button>
     <nav>
       <ul class="nav-menu-list">
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">Collection</a>
-        </li>
-        <li>
-          <a href="#">Women</a>
-        </li>
-        <li>
-          <a href="#">Men</a>
-        </li>
-        <li>
-          <a href="#">Heritage</a>
-        </li>
-        <li>
-          <a href="#">Sustainability</a>
-        </li>
+        {
+          NAV_MENU.map(({ href, label }) => (
+            <li class:list={{ active: pathname === href }}>
+              <a href={href}>{label}</a>
+            </li>
+          ))
+        }
       </ul>
 
       <ul class="nav-menu-social">
-        <li><a href="#">youtube</a></li>
-        <li><a href="#">pinterest</a></li>
-        <li><a href="#">instagram</a></li>
-        <li><a href="#">twitter</a></li>
+        {
+          SOCIAL_LIST.map(({ href, label }) => (
+            <li>
+              <a href={href} target="_blank">
+                {label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </div>
@@ -88,23 +88,49 @@
 
     a {
       display: block;
-
-      &:hover {
-        color: var(--secondary-black);
-      }
     }
   }
 
   .nav-menu-list {
     font-family: var(--font-flecha);
     font-size: 64px;
+    text-transform: capitalize;
+
+    li {
+      position: relative;
+
+      &::before {
+        display: none;
+        content: "(here)";
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        font-family: var(--font-maison-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+
+        @media (--tablet-lg) {
+          content: "(you are here)";
+          font-size: 14px;
+        }
+      }
+    }
+
+    li:hover:not(.active) {
+      color: var(--secondary-black);
+    }
+
+    li.active::before {
+      display: block;
+    }
 
     li + li {
       margin-block-start: 8px;
-    }
 
-    @media (--tablet-lg) {
-      margin-block-start: 16px;
+      @media (--tablet-lg) {
+        margin-block-start: 16px;
+      }
     }
   }
 
@@ -116,9 +142,14 @@
     text-transform: uppercase;
     border: 1px solid currentColor;
 
-    & > li {
+    li {
       block-size: 40px;
       align-content: center;
+
+      &:hover {
+        color: var(--secondary-black);
+        background-color: var(--primary-cream);
+      }
     }
 
     li:nth-child(even) {

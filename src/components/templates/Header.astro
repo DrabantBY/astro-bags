@@ -9,15 +9,12 @@ import NavMenu from "@templates/NavMenu.astro";
       <li>
         <NavMenu />
       </li>
-
       <li>
-        <a class="icon-login" href="/login"></a>
+        <a class="icon-login" href="/auth"></a>
       </li>
-
       <li>
         <Logo />
       </li>
-
       <li>
         <button
           class="icon-search"
@@ -61,7 +58,7 @@ import NavMenu from "@templates/NavMenu.astro";
     }
   }
 
-  li:has(> a > img) {
+  li:has(> a > picture) {
     flex-grow: 1;
     display: grid;
     place-items: center;

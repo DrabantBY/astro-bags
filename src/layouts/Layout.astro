@@ -38,14 +38,6 @@ import Header from "@templates/Header.astro";
     --secondary-black: #5a5a5a;
   }
 
-  @font-face {
-    font-family: "iconfont";
-    src: url("../assets/fonts/icons.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
-  }
-
   *,
   *::before,
   *::after {
@@ -69,10 +61,10 @@ import Header from "@templates/Header.astro";
 
   body {
     font-family: var(--font-maison-mono);
-  }
 
-  body:has(dialog[open]) {
-    overflow: hidden;
+    &:has(dialog[open]) {
+      overflow: hidden;
+    }
   }
 
   #root {
@@ -122,19 +114,19 @@ import Header from "@templates/Header.astro";
     color: inherit;
     border: none;
     outline: none;
-  }
 
-  input::placeholder {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    color: inherit;
-  }
+    &[type="checkbox"],
+    &[type="radio"],
+    &[type="search"]::-webkit-search-cancel-button {
+      appearance: none;
+    }
 
-  input[type="checkbox"],
-  input[type="radio"],
-  input[type="search"]::-webkit-search-cancel-button {
-    appearance: none;
+    &::placeholder {
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+    }
   }
 
   fieldset {
@@ -158,10 +150,10 @@ import Header from "@templates/Header.astro";
     outline: none;
     background: none;
     cursor: pointer;
-  }
 
-  button:disabled {
-    cursor: not-allowed;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   dialog {
@@ -174,18 +166,18 @@ import Header from "@templates/Header.astro";
 
   details {
     overflow: hidden;
-  }
 
-  details::details-content {
-    block-size: 0;
-    transition:
-      block-size 0.2s,
-      content-visibility 0.2s;
-    transition-behavior: allow-discrete;
-  }
+    &::details-content {
+      block-size: 0;
+      transition:
+        block-size 0.2s,
+        content-visibility 0.2s;
+      transition-behavior: allow-discrete;
+    }
 
-  details[open]::details-content {
-    block-size: auto;
+    &[open]::details-content {
+      block-size: auto;
+    }
   }
 
   [popover] {
@@ -202,6 +194,14 @@ import Header from "@templates/Header.astro";
     }
   }
 
+  @font-face {
+    font-family: "iconfont";
+    src: url("../assets/fonts/icons.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+
   [class^="icon-"]::before {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: "iconfont" !important;
@@ -211,8 +211,7 @@ import Header from "@templates/Header.astro";
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-
-    /* Better Font Rendering =========== */
+    /* Better Font Rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -220,45 +219,59 @@ import Header from "@templates/Header.astro";
   .icon-login::before {
     content: "\e900";
   }
+
   .icon-search::before {
     content: "\e901";
   }
+
   .icon-bag::before {
     content: "\e902";
   }
+
   .icon-burger::before {
     content: "\e903";
   }
+
   .icon-filter::before {
     content: "\e904";
   }
+
   .icon-sort::before {
     content: "\e905";
   }
+
   .icon-tick::before {
     content: "\e906";
   }
+
   .icon-mark::before {
     content: "\e907";
   }
+
   .icon-remove::before {
     content: "\e908";
   }
+
   .icon-arrow-right::before {
     content: "\e909";
   }
+
   .icon-arrow-left::before {
     content: "\e90a";
   }
+
   .icon-down::before {
     content: "\e90b";
   }
+
   .icon-show::before {
     content: "\e90c";
   }
+
   .icon-hide::before {
     content: "\e90d";
   }
+
   .icon-calendar::before {
     content: "\e90e";
   }
