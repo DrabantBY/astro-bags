@@ -1,8 +1,11 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import solidJs from "@astrojs/solid-js";
 
 // https://astro.build/config
 export default defineConfig({
+  compressHTML: false,
+
   build: {
     format: "preserve",
     assets: "assets",
@@ -21,6 +24,7 @@ export default defineConfig({
   },
 
   experimental: {
+    chromeDevtoolsWorkspace: true,
     fonts: [
       {
         name: "Flecha",
@@ -28,10 +32,7 @@ export default defineConfig({
         provider: "local",
         variants: [
           {
-            src: [
-              "./src/assets/fonts/Flecha.woff2",
-              "./src/assets/fonts/Flecha.woff",
-            ],
+            src: ["./src/assets/fonts/FlechaLight.otf"],
           },
         ],
       },
@@ -65,4 +66,6 @@ export default defineConfig({
       },
     ],
   },
+
+  integrations: [solidJs({ devtools: true })],
 });

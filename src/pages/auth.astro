@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { LoginForm } from "@solidforms/index";
+---
+
+<Layout>
+  <section>
+    <div class="__container">
+      <LoginForm client:only="solid-js" />
+    </div>
+  </section>
+</Layout>

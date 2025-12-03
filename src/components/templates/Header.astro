@@ -1,0 +1,94 @@
+---
+import Logo from "@templates/Logo.astro";
+import NavMenu from "@templates/NavMenu.astro";
+---
+
+<header>
+  <div class="__container">
+    <ul>
+      <li>
+        <NavMenu />
+      </li>
+      <li>
+        <a class="icon-login" href="/auth"></a>
+      </li>
+      <li>
+        <Logo />
+      </li>
+      <li>
+        <button
+          class="icon-search"
+          type="button"
+          popovertarget="search-field"
+          popovertargetaction="toggle"></button>
+      </li>
+      <li>
+        <a class="icon-bag" href="/cart"></a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<style>
+  header {
+    min-block-size: 74px;
+    padding-block: 8px;
+    align-content: center;
+    color: var(--primary-terracota);
+    border-bottom: 1px solid currentColor;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  li > [class^="icon-"] {
+    block-size: 24px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &:hover {
+      color: var(--secondary-black);
+    }
+  }
+
+  li:has(> a > picture) {
+    flex-grow: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  @media (--tablet-lg) {
+    header {
+      min-block-size: 100px;
+    }
+
+    ul {
+      gap: 32px;
+    }
+
+    li > .icon-search::after {
+      content: "SEARCH";
+      transform: translateY(2px);
+      font-size: 14px;
+    }
+
+    li:has(.icon-burger) {
+      inline-size: 192px;
+    }
+
+    li:has(.icon-login) {
+      order: 1;
+    }
+
+    li:has(.icon-bag) {
+      order: 2;
+    }
+  }
+</style>

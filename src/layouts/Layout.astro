@@ -1,5 +1,6 @@
 ---
 import Head from "@templates/Head.astro";
+import Header from "@templates/Header.astro";
 ---
 
 <!doctype html>
@@ -7,13 +8,14 @@ import Head from "@templates/Head.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Astro-Bags</title>
     <Head />
   </head>
   <body>
     <div id="root">
+      <Header />
       <main id="main">
         <slot />
       </main>
@@ -25,19 +27,17 @@ import Head from "@templates/Head.astro";
   :root {
     box-sizing: border-box;
     scroll-behavior: smooth;
-    //scrollbar-width: none;
+    /*scrollbar-width: none;*/
     interpolate-size: allow-keywords;
     user-select: none;
-  }
 
-  @custom-media --mobile (width < 428px);
-  @custom-media --tablet-sm (427px < width < 576px);
-  @custom-media --tablet-md (575px < width < 768px);
-  @custom-media --tablet-lg (767px < width < 992px);
-  @custom-media --laptop-sm (991px < width < 1280px);
-  @custom-media --laptop-md (1279px < width < 1440px);
-  @custom-media --laptop-lg (1439px < width < 1686px);
-  @custom-media --desktop (width > 1685px);
+    --primary-white: #ffffff;
+    --primary-black: #080808;
+    --primary-terracota: #8d402d;
+    --primary-cream: #f3eae0;
+    --primary-red: #ff4444;
+    --secondary-black: #5a5a5a;
+  }
 
   *,
   *::before,
@@ -62,10 +62,10 @@ import Head from "@templates/Head.astro";
 
   body {
     font-family: var(--font-maison-mono);
-  }
 
-  body:has(dialog[open]) {
-    overflow: hidden;
+    &:has(dialog[open]) {
+      overflow: hidden;
+    }
   }
 
   #root {
@@ -115,19 +115,21 @@ import Head from "@templates/Head.astro";
     color: inherit;
     border: none;
     outline: none;
-  }
+    text-transform: inherit;
+    background-color: transparent;
 
-  input::placeholder {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    color: inherit;
-  }
+    &[type="checkbox"],
+    &[type="radio"],
+    &[type="search"]::-webkit-search-cancel-button {
+      appearance: none;
+    }
 
-  input[type="checkbox"],
-  input[type="radio"],
-  input[type="search"]::-webkit-search-cancel-button {
-    appearance: none;
+    &::placeholder {
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+    }
   }
 
   fieldset {
@@ -151,10 +153,10 @@ import Head from "@templates/Head.astro";
     outline: none;
     background: none;
     cursor: pointer;
-  }
 
-  button:disabled {
-    cursor: not-allowed;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   dialog {
@@ -167,18 +169,18 @@ import Head from "@templates/Head.astro";
 
   details {
     overflow: hidden;
-  }
 
-  details::details-content {
-    block-size: 0;
-    transition:
-      block-size 0.2s,
-      content-visibility 0.2s;
-    transition-behavior: allow-discrete;
-  }
+    &::details-content {
+      block-size: 0;
+      transition:
+        block-size 0.2s,
+        content-visibility 0.2s;
+      transition-behavior: allow-discrete;
+    }
 
-  details[open]::details-content {
-    block-size: auto;
+    &[open]::details-content {
+      block-size: auto;
+    }
   }
 
   [popover] {
@@ -193,5 +195,118 @@ import Head from "@templates/Head.astro";
     @media (--desktop) {
       padding-inline: 100px;
     }
+  }
+
+  .action {
+    display: block;
+    inline-size: 216px;
+    block-size: 40px;
+    align-content: center;
+    font-family: var(--font-maison-light);
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--primary-terracota);
+    border: 1px solid currentColor;
+    border-radius: 20px;
+
+    &:hover {
+      color: var(--primary-cream);
+      background-color: var(--primary-terracota);
+      border-color: var(--primary-terracota);
+    }
+  }
+
+  .link {
+    display: block;
+    color: var(--primary-cream);
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  @font-face {
+    font-family: "iconfont";
+    src: url("../assets/fonts/icons.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+
+  [class^="icon-"]::before {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "iconfont" !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .icon-login::before {
+    content: "\e900";
+  }
+
+  .icon-search::before {
+    content: "\e901";
+  }
+
+  .icon-bag::before {
+    content: "\e902";
+  }
+
+  .icon-burger::before {
+    content: "\e903";
+  }
+
+  .icon-filter::before {
+    content: "\e904";
+  }
+
+  .icon-sort::before {
+    content: "\e905";
+  }
+
+  .icon-tick::before {
+    content: "\e906";
+  }
+
+  .icon-mark::before {
+    content: "\e907";
+  }
+
+  .icon-remove::before {
+    content: "\e908";
+  }
+
+  .icon-arrow-right::before {
+    content: "\e909";
+  }
+
+  .icon-arrow-left::before {
+    content: "\e90a";
+  }
+
+  .icon-down::before {
+    content: "\e90b";
+  }
+
+  .icon-show::before {
+    content: "\e90c";
+  }
+
+  .icon-hide::before {
+    content: "\e90d";
+  }
+
+  .icon-calendar::before {
+    content: "\e90e";
   }
 </style>

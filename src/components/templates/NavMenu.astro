@@ -1,0 +1,228 @@
+---
+import { NAV_MENU, SOCIAL_LIST } from "@const/index";
+
+const { pathname } = Astro.url;
+---
+
+<button
+  class="icon-burger"
+  type="button"
+  commandfor="nav-menu"
+  command="show-modal"></button>
+
+<dialog id="nav-menu">
+  <div class="nav-menu-body">
+    <button type="button" command="close" commandfor="nav-menu">CLOSE</button>
+    <nav>
+      <ul class="nav-menu-list">
+        {
+          NAV_MENU.map(({ href, label }) => (
+            <li class:list={{ active: pathname === href }}>
+              <a href={href}>{label}</a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="nav-menu-social">
+        {
+          SOCIAL_LIST.map(({ href, label }) => (
+            <li>
+              <a href={href} target="_blank">
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</dialog>
+
+<style>
+  #nav-menu {
+    block-size: 100dvh;
+    max-block-size: 100dvh;
+    inline-size: min(100%, 375px);
+    max-inline-size: min(100%, 375px);
+    padding-block: 10px;
+    padding-inline: 10px;
+    color: var(--primary-white);
+    background-color: var(--primary-black);
+    border-top-right-radius: 190px;
+    transform: translateX(-100%);
+    transition:
+      transform 0.3s,
+      display 0.3s,
+      overlay 0.3s;
+    transition-behavior: allow-discrete;
+    scrollbar-width: none;
+    &[open] {
+      transform: translateX(0);
+
+      @starting-style {
+        transform: translateX(-100%);
+      }
+    }
+
+    &::backdrop {
+      background-color: transparent;
+    }
+  }
+
+  .nav-menu-body {
+    position: relative;
+    padding-inline: 30px;
+    padding-block-start: 80px;
+    padding-block-end: 30px;
+    border: 2px solid currentColor;
+    border-top-right-radius: 180px;
+    text-align: center;
+
+    & > button {
+      position: absolute;
+      inset-inline-start: 32px;
+      inset-block-start: 32px;
+      font-size: 12px;
+    }
+
+    a {
+      display: block;
+    }
+  }
+
+  .nav-menu-list {
+    font-family: var(--font-flecha);
+    font-size: 64px;
+    text-transform: capitalize;
+
+    li {
+      position: relative;
+
+      &::before {
+        display: none;
+        content: "(here)";
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        font-family: var(--font-maison-mono);
+        font-size: 10px;
+        text-transform: uppercase;
+
+        @media (--tablet-lg) {
+          content: "(you are here)";
+          font-size: 14px;
+        }
+      }
+    }
+
+    li:hover:not(.active) {
+      color: var(--secondary-black);
+    }
+
+    li.active::before {
+      display: block;
+    }
+
+    li + li {
+      margin-block-start: 8px;
+
+      @media (--tablet-lg) {
+        margin-block-start: 16px;
+      }
+    }
+  }
+
+  .nav-menu-social {
+    margin-block-start: 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    font-size: 12px;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+
+    li {
+      block-size: 40px;
+      align-content: center;
+
+      &:hover {
+        color: var(--secondary-black);
+        background-color: var(--primary-cream);
+      }
+    }
+
+    li:nth-child(even) {
+      border-left: 1px solid currentColor;
+    }
+
+    li:last-child,
+    li:has(+ li:last-child) {
+      border-top: 1px solid currentColor;
+    }
+  }
+
+  .icon-burger {
+    block-size: 24px;
+    min-inline-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  button:hover {
+    color: var(--secondary-black);
+  }
+
+  @media (--tablet-lg) {
+    #nav-menu {
+      inline-size: min(94%, 840px);
+      max-inline-size: min(94%, 840px);
+      padding-block: 24px;
+      padding-inline: 24px;
+      border-top-right-radius: 384px;
+    }
+
+    .nav-menu-body {
+      padding-block-start: 140px;
+      padding-inline: 90px;
+      padding-block-end: 40px;
+      border-top-right-radius: 360px;
+
+      & > button {
+        font-size: 14px;
+      }
+    }
+
+    .nav-menu-social {
+      margin-block-start: 96px;
+
+      font-size: 14px;
+
+      & > li {
+        block-size: 50px;
+      }
+
+      li + li {
+        border-left: 1px solid currentColor;
+      }
+
+      li:last-child,
+      li:has(+ li:last-child) {
+        border-top: initial;
+      }
+    }
+
+    .icon-burger {
+      inline-size: fit-content;
+      font-size: 24px;
+    }
+
+    .icon-burger::after {
+      content: "MENU";
+      font-size: 14px;
+      transform: translateY(2px);
+    }
+  }
+</style>
