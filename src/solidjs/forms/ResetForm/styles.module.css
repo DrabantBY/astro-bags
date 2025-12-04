@@ -1,0 +1,29 @@
+.form {
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-block-start: 64px;
+
+  & > div:has(input) + div:has(input) {
+    margin-block-start: 8px;
+  }
+}
+
+.message {
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: pretty;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--primary-red);
+}
+
+.actions {
+  margin-block-start: 40px;
+
+  & > button + button {
+    margin-block-start: 10px;
+  }
+}
