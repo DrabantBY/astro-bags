@@ -1,60 +1,57 @@
+import type { FormTypes } from "@solidjs/types";
+
 import { createSignal, Show } from "solid-js";
 
 import { AuthService } from "@auth/services";
-import { InputField } from "@solidcomponents/index";
+import { InputField } from "@solidjs/components";
 
 import styles from "./styles.module.css";
 
-type SubmitFormEvent = SubmitEvent & {
-  currentTarget: HTMLFormElement;
-  target: Element;
-};
-
-export const LoginForm = () => {
+export const LoginForm = (props: FormTypes.FormProps) => {
   const [message, setMessage] = createSignal("");
 
-  const onSubmit = async (e: SubmitFormEvent) => {
+  const onSubmit = async (e: FormTypes.FormEvent) => {
     e.preventDefault();
     const data = await AuthService.login(new FormData(e.currentTarget));
-    if (data && data.status) {
+
+    if (data && data.status === "error") {
       setMessage(data.message);
+      return;
     }
+
+    window.location.href = "/";
   };
 
   return (
-    <section class={styles.shell}>
-      <figure class={styles.figure}>
-        <img src="/monogram.png" alt="monogram picture" />
-      </figure>
+    <form class={styles.form} name="login" onSubmit={onSubmit} novalidate>
+      <InputField type="email" name="login" label="email" required />
+      <InputField type="password" name="password" label="password" required />
 
-      <h2 class={styles.title}>I already have an account</h2>
+      <button
+        class="link"
+        type="button"
+        onClick={() => props.setFormName("RESET")}
+      >
+        Forgot your password?
+      </button>
 
-      <p class={styles.text}>
-        If you already have an account, please enter your email and password
-      </p>
+      <Show when={message()}>
+        <p class={styles.message}>{message()}</p>
+      </Show>
 
-      <form class={styles.form} onSubmit={onSubmit}>
-        <InputField type="email" name="login" label="email" required />
-        <InputField type="password" name="password" label="password" required />
-
-        <button class="link" type="button">
-          Forgot your password?
+      <div class={styles.actions}>
+        <button class="action" type="submit">
+          login
         </button>
 
-        <Show when={message()}>
-          <p class={styles.message}>{message()}</p>
-        </Show>
-
-        <div class={styles.actions}>
-          <button class="action" type="submit">
-            login
-          </button>
-
-          <button class="action" type="button">
-            create account
-          </button>
-        </div>
-      </form>
-    </section>
+        <button
+          class="action"
+          type="button"
+          onClick={() => props.setFormName("SIGNUP")}
+        >
+          create account
+        </button>
+      </div>
+    </form>
   );
 };

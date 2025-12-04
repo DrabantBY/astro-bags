@@ -6,6 +6,23 @@
   font-size: 14px;
   line-height: 1;
   text-transform: uppercase;
+
+  &:has(input:user-invalid) {
+    color: var(--primary-red);
+  }
+
+  &:has(input:user-valid) {
+    color: var(--primary-terracota);
+
+    &::before {
+      content: "\e906";
+      position: absolute;
+      inset-inline-end: 0;
+      inset-block-start: 50%;
+      transform: translateY(-50%);
+      font-family: "iconfont";
+    }
+  }
 }
 
 .label {
@@ -26,10 +43,6 @@
     font-size: 10px;
     transform: translateY(-16px);
   }
-
-  &:has(+ input:user-invalid) {
-    color: var(--primary-red);
-  }
 }
 
 .input {
@@ -38,8 +51,8 @@
   color: currentColor;
   border-bottom: 1px solid currentColor;
 
-  &:user-invalid {
-    color: var(--primary-red);
+  &:user-valid ~ .error {
+    display: none;
   }
 }
 
@@ -49,5 +62,4 @@
   inset-block-start: calc(100% + 4px);
   font-size: 10px;
   font-weight: 700;
-  color: var(--primary-red);
 }
