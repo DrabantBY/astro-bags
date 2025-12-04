@@ -8,13 +8,14 @@ import styles from "./styles.module.css";
 export const InputField = (props: FormTypes.FieldProps) => {
   const id = createUniqueId();
 
-  const [errorStore, setErrorStore] = createStore<FormTypes.FieldError>({
+  const [fieldStore, setFieldStore] = createStore<FormTypes.FieldStore>({
+    type: props.type ?? "text",
     error: false,
     errorMessage: "",
   });
 
   const onBlur = (e: FormTypes.FieldEvent) => {
-    setErrorStore(
+    setFieldStore(
       produce((store) => {
         store.error = !e.target.validity.valid;
         store.errorMessage = e.target.validationMessage;
@@ -30,7 +31,7 @@ export const InputField = (props: FormTypes.FieldProps) => {
       <input
         class={styles.input}
         id={id}
-        type={props.type ?? "text"}
+        type={fieldStore.type}
         inputMode={props.inputMode ?? "text"}
         name={props.name}
         value={props.value ?? ""}
@@ -40,8 +41,26 @@ export const InputField = (props: FormTypes.FieldProps) => {
         required={props.required}
         placeholder={props.placeholder ?? ""}
       />
-      <Show when={errorStore.error}>
-        <span class={styles.error}>{errorStore.errorMessage}</span>
+
+      <Show when={fieldStore.error}>
+        <span class={styles.error}>{fieldStore.errorMessage}</span>
+      </Show>
+
+      <Show when={props.type === "password"}>
+        <button
+          type="button"
+          classList={{
+            "icon-show": fieldStore.type === "password",
+            "icon-hide": fieldStore.type === "text",
+          }}
+          onClick={() => {
+            setFieldStore(
+              produce((store) => {
+                store.type = store.type === "password" ? "text" : "password";
+              }),
+            );
+          }}
+        />
       </Show>
     </div>
   );

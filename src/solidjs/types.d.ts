@@ -11,7 +11,8 @@ export namespace FormTypes {
     | "numeric"
     | "decimal";
 
-  type FieldError = {
+  type FieldStore = {
+    type: string;
     error: boolean;
     errorMessage: string | undefined;
   };
