@@ -1,12 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { LoginForm } from "@solidforms/index";
+import { AuthPage } from "@solidjs/AuthPage.tsx";
 ---
 
 <Layout>
   <section>
     <div class="__container">
-      <LoginForm client:only="solid-js" />
+      <AuthPage client:only="solid-js" />
     </div>
   </section>
 </Layout>
