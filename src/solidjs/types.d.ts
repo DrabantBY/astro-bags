@@ -28,8 +28,8 @@ export namespace FormTypes {
     pattern?: string;
     required?: boolean;
   };
-
-  type FormName = "LOGIN" | "RESET" | "SIGNUP";
+  //TODO remove CONFIRM
+  type FormName = "LOGIN" | "RESET" | "SIGNUP" | "CONFIRM";
 
   type FormProps = {
     setFormName: Setter<FormName>;

@@ -210,7 +210,11 @@ import Header from "@templates/Header.astro";
     border: 1px solid currentColor;
     border-radius: 20px;
 
-    &:hover {
+    &:disabled {
+      color: var(--secondary-black);
+    }
+
+    &:hover:not(:disabled) {
       color: var(--primary-cream);
       background-color: var(--primary-terracota);
       border-color: var(--primary-terracota);
@@ -224,7 +228,11 @@ import Header from "@templates/Header.astro";
     text-transform: uppercase;
     text-decoration: underline;
 
-    &:hover {
+    &:disabled {
+      color: var(--secondary-black);
+    }
+
+    &:hover:not(:disabled) {
       opacity: 0.8;
     }
   }
