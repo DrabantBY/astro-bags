@@ -1,0 +1,53 @@
+.field {
+  position: relative;
+  block-size: 36px;
+  inline-size: min(100%, 360px);
+  align-content: end;
+  font-size: 14px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.label {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 16px;
+  color: currentColor;
+  transition:
+    transform linear 0.1s,
+    font-size linear 0.1s;
+
+  &:has(+ input[required])::after {
+    content: "*";
+  }
+
+  &:has(+ input:focus),
+  &:has(+ input:not(:placeholder-shown)) {
+    font-size: 10px;
+    transform: translateY(-16px);
+  }
+
+  &:has(+ input:user-invalid) {
+    color: var(--primary-red);
+  }
+}
+
+.input {
+  block-size: 26px;
+  inline-size: 100%;
+  color: currentColor;
+  border-bottom: 1px solid currentColor;
+
+  &:user-invalid {
+    color: var(--primary-red);
+  }
+}
+
+.error {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: calc(100% + 4px);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--primary-red);
+}

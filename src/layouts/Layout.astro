@@ -35,6 +35,7 @@ import Header from "@templates/Header.astro";
     --primary-black: #080808;
     --primary-terracota: #8d402d;
     --primary-cream: #f3eae0;
+    --primary-red: #ff4444;
     --secondary-black: #5a5a5a;
   }
 
@@ -114,6 +115,8 @@ import Header from "@templates/Header.astro";
     color: inherit;
     border: none;
     outline: none;
+    text-transform: inherit;
+    background-color: transparent;
 
     &[type="checkbox"],
     &[type="radio"],
@@ -191,6 +194,37 @@ import Header from "@templates/Header.astro";
 
     @media (--desktop) {
       padding-inline: 100px;
+    }
+  }
+
+  .action {
+    display: block;
+    inline-size: 216px;
+    block-size: 40px;
+    align-content: center;
+    font-family: var(--font-maison-light);
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--primary-terracota);
+    border: 1px solid currentColor;
+    border-radius: 20px;
+
+    &:hover {
+      color: var(--primary-cream);
+      background-color: var(--primary-terracota);
+      border-color: var(--primary-terracota);
+    }
+  }
+
+  .link {
+    display: block;
+    color: var(--primary-cream);
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 

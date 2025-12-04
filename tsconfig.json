@@ -5,7 +5,9 @@
       "@const/*": ["./src/const/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@templates/*": ["./src/components/templates/*"],
-      "@forms/*": ["./src/solidjs/forms/*"]
+      "@auth/*": ["./src/auth/*"],
+      "@solidforms/*": ["./src/solidjs/forms/*"],
+      "@solidcomponents/*": ["./src/solidjs/components/*"]
     },
     "jsx": "preserve",
     "jsxImportSource": "solid-js"
