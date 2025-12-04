@@ -1,50 +1,19 @@
+import type { FormTypes } from "@solidjs/types";
+
 import { createUniqueId, Show } from "solid-js";
 import { createStore, produce } from "solid-js/store";
 
 import styles from "./styles.module.css";
 
-type InputMode =
-  | "search"
-  | "text"
-  | "url"
-  | "none"
-  | "email"
-  | "tel"
-  | "numeric"
-  | "decimal";
-
-type InputFieldProps = {
-  type?: string;
-  inputMode?: InputMode;
-  name?: string;
-  label?: string;
-  value?: string;
-  placeholder?: string;
-  onChange?: () => void;
-  onInput?: () => void;
-  pattern?: string;
-  required?: boolean;
-};
-
-type InputFieldEvent = Event & {
-  currentTarget: HTMLInputElement;
-  target: HTMLInputElement;
-};
-
-type InputFieldError = {
-  error: boolean;
-  errorMessage: string | undefined;
-};
-
-export const InputField = (props: InputFieldProps) => {
+export const InputField = (props: FormTypes.FieldProps) => {
   const id = createUniqueId();
 
-  const [errorStore, setErrorStore] = createStore<InputFieldError>({
+  const [errorStore, setErrorStore] = createStore<FormTypes.FieldError>({
     error: false,
     errorMessage: "",
   });
 
-  const onBlur = (e: InputFieldEvent) => {
+  const onBlur = (e: FormTypes.FieldEvent) => {
     setErrorStore(
       produce((store) => {
         store.error = !e.target.validity.valid;

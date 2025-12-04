@@ -7,7 +7,7 @@ import { InputField } from "@solidjs/components";
 
 import styles from "./styles.module.css";
 
-export const LoginForm = (props: FormTypes.FormProps) => {
+export const ResetForm = (props: FormTypes.FormProps) => {
   const [message, setMessage] = createSignal("");
 
   const onSubmit = async (e: FormTypes.FormEvent) => {
@@ -18,21 +18,18 @@ export const LoginForm = (props: FormTypes.FormProps) => {
       setMessage(data.message);
       return;
     }
-
-    window.location.href = "/";
   };
 
   return (
-    <form class={styles.form} name="login" onSubmit={onSubmit} novalidate>
-      <InputField type="email" name="login" label="email" required />
-      <InputField type="password" name="password" label="password" required />
+    <form class={styles.form} name="reset" onSubmit={onSubmit} novalidate>
+      <InputField type="email" name="email" label="email" required />
 
       <button
         class="link"
         type="button"
-        onClick={() => props.setFormName("RESET")}
+        onClick={() => props.setFormName("LOGIN")}
       >
-        Forgot your password?
+        Back to login
       </button>
 
       <Show when={message()}>
@@ -41,15 +38,7 @@ export const LoginForm = (props: FormTypes.FormProps) => {
 
       <div class={styles.actions}>
         <button class="action" type="submit">
-          login
-        </button>
-
-        <button
-          class="action"
-          type="button"
-          onClick={() => props.setFormName("SIGNUP")}
-        >
-          create account
+          confirm
         </button>
       </div>
     </form>

@@ -6,8 +6,7 @@
       "@layouts/*": ["./src/layouts/*"],
       "@templates/*": ["./src/components/templates/*"],
       "@auth/*": ["./src/auth/*"],
-      "@solidforms/*": ["./src/solidjs/forms/*"],
-      "@solidcomponents/*": ["./src/solidjs/components/*"]
+      "@solidjs/*": ["./src/solidjs/*"]
     },
     "jsx": "preserve",
     "jsxImportSource": "solid-js"
