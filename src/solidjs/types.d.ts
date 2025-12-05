@@ -1,5 +1,13 @@
 import type { JSX, Setter } from "solid-js";
 
+declare module "solid-js" {
+  namespace JSX {
+    interface Directives {
+      validate: (error: boolean, message: string) => void;
+    }
+  }
+}
+
 export namespace FormTypes {
   type FieldMode =
     | "search"

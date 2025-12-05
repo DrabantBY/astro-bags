@@ -1,27 +1,17 @@
 import type { FormTypes } from "@solidjs/types";
 
-import { createUniqueId, Show } from "solid-js";
-import { createStore, produce } from "solid-js/store";
+import { Show } from "solid-js";
+
+import { useInputFieldStore } from "@solidjs/hooks";
+
+import { validate } from "@solidjs/directives";
 
 import styles from "./styles.module.css";
 
 export const InputField = (props: FormTypes.FieldProps) => {
-  const id = createUniqueId();
-
-  const [fieldStore, setFieldStore] = createStore<FormTypes.FieldStore>({
-    type: props.type ?? "text",
-    error: false,
-    errorMessage: "",
-  });
-
-  const onBlur = (e: FormTypes.FieldEvent) => {
-    setFieldStore(
-      produce((store) => {
-        store.error = !e.target.validity.valid;
-        store.errorMessage = e.target.validationMessage;
-      }),
-    );
-  };
+  const { id, fieldStore, onBlurValidate, onClickToggle } = useInputFieldStore(
+    props.type,
+  );
 
   return (
     <div class={styles.field}>
@@ -36,10 +26,11 @@ export const InputField = (props: FormTypes.FieldProps) => {
         name={props.name}
         value={props.value ?? ""}
         onChange={props.onChange}
-        onBlur={onBlur}
         onInput={props.onInput}
         required={props.required}
+        pattern={props.pattern}
         placeholder={props.placeholder ?? ""}
+        use:validate={onBlurValidate}
       />
 
       <Show when={fieldStore.error}>
@@ -53,13 +44,7 @@ export const InputField = (props: FormTypes.FieldProps) => {
             "icon-show": fieldStore.type === "password",
             "icon-hide": fieldStore.type === "text",
           }}
-          onClick={() => {
-            setFieldStore(
-              produce((store) => {
-                store.type = store.type === "password" ? "text" : "password";
-              }),
-            );
-          }}
+          onClick={onClickToggle}
         />
       </Show>
     </div>

@@ -24,6 +24,10 @@
     color: var(--primary-red);
   }
 
+  &:has(button)::after {
+    display: none;
+  }
+
   &:has(input:user-valid) {
     color: var(--primary-terracota);
 
