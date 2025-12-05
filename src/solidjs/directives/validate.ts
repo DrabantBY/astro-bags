@@ -13,10 +13,16 @@ export const validate = (
       message = `${this.name} has invalid value`;
     } else if (this.validity.typeMismatch) {
       message = `${this.name} has invalid ${this.type} type`;
+    } else if (
+      this.name === "repeat" &&
+      this.value !==
+        (this.form?.elements?.namedItem("password") as HTMLInputElement).value
+    ) {
+      message = `password doesn't match`;
     }
 
     this.setCustomValidity(message);
 
-    handleEvent()(!this.validity.valid, this.validationMessage);
+    handleEvent()(this.validity.customError, this.validationMessage);
   });
 };

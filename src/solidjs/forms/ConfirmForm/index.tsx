@@ -35,8 +35,8 @@ export const ConfirmForm = (props: FormTypes.FormProps) => {
 
       <InputField
         type="password"
-        name="confirm"
-        label="confirm password"
+        name="repeat"
+        label="repeat password"
         required
       />
 
