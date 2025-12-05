@@ -1,13 +1,14 @@
 import type { FormTypes } from "@solidjs/types";
+import type { AuthTypes } from "@solidjs/auth/types";
 
 import { createSignal, Show } from "solid-js";
 
 import { AuthService } from "@auth/services";
 import { InputField } from "@solidjs/components";
 
-import styles from "@solidjs/styles.module.css";
+import styles from "@solidjs/auth/styles.module.css";
 
-export const SignupForm = (props: FormTypes.FormProps) => {
+export const SignupForm = (props: AuthTypes.FormProps) => {
   const [message, setMessage] = createSignal<string>("");
   const [disable, setDisable] = createSignal<boolean>(false);
 

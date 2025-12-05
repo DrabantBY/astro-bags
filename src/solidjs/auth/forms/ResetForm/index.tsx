@@ -1,13 +1,13 @@
-import type { FormTypes } from "@solidjs/types";
+import type { AuthTypes } from "@solidjs/auth/types";
 
 import { createSignal, Show } from "solid-js";
 
 import { AuthService } from "@auth/services";
 import { InputField } from "@solidjs/components";
 
-import styles from "@solidjs/styles.module.css";
+import styles from "@solidjs/auth/styles.module.css";
 
-export const ActivateForm = (props: FormTypes.FormProps) => {
+export const ResetForm = (props: AuthTypes.FormProps) => {
   const [message, setMessage] = createSignal<string>("");
   const [disable, setDisable] = createSignal<boolean>(false);
 
@@ -25,15 +25,15 @@ export const ActivateForm = (props: FormTypes.FormProps) => {
   };
 
   return (
-    <form class={styles.form} name="activate" onSubmit={onSubmit} novalidate>
-      <InputField type="text" name="code" label="enter code" required />
+    <form class={styles.form} name="reset" onSubmit={onSubmit} novalidate>
+      <InputField type="email" name="email" label="email" required />
 
       <button
         class="link"
         type="button"
         onClick={() => props.setFormName("LOGIN")}
       >
-        I already have an account
+        Back to login
       </button>
 
       <Show when={message()}>
@@ -42,7 +42,7 @@ export const ActivateForm = (props: FormTypes.FormProps) => {
 
       <div class={styles.actions}>
         <button class="action" type="submit" disabled={disable()}>
-          activate
+          confirm
         </button>
       </div>
     </form>

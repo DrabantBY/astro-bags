@@ -1,6 +1,6 @@
 import type { JSX } from "solid-js";
 
-import styles from "@solidjs/styles.module.css";
+import styles from "@solidjs/auth/styles.module.css";
 
 type AuthShellProps = {
   title: string;

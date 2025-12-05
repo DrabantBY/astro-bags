@@ -1,5 +1,3 @@
-import type { JSX, Setter } from "solid-js";
-
 declare module "solid-js" {
   namespace JSX {
     interface Directives {
@@ -37,14 +35,6 @@ export namespace FormTypes {
     pattern?: string;
     required?: boolean;
   };
-  //TODO remove CONFIRM
-  type FormName = "LOGIN" | "RESET" | "SIGNUP" | "CONFIRM" | "ACTIVATE";
-
-  type FormProps = {
-    setFormName: Setter<FormName>;
-  };
-
-  type FormList = Record<FormName, (props: FormProps) => JSX.Element>;
 
   type FieldEvent = Event & {
     currentTarget: HTMLInputElement;

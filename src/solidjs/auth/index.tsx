@@ -1,18 +1,19 @@
-import type { FormTypes } from "@solidjs/types";
+import type { AuthTypes } from "./types";
 
 import { createSignal } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-import { AuthShell } from "@solidjs/shells";
 import {
   LoginForm,
   ResetForm,
   ConfirmForm,
   SignupForm,
   ActivateForm,
-} from "@solidjs/forms";
+} from "./forms";
 
-const FORM_LIST: FormTypes.FormList = {
+import { AuthShell } from "./shells";
+
+const FORM_LIST: AuthTypes.FormList = {
   LOGIN: LoginForm,
   RESET: ResetForm,
   SIGNUP: SignupForm,
@@ -45,10 +46,10 @@ const FORM_TITLES = {
     title: "Account activation",
     text: "Please enter the activation code you just received by email",
   },
-};
+} as const;
 
 export const AuthPage = () => {
-  const [formName, setFormName] = createSignal<FormTypes.FormName>("LOGIN");
+  const [formName, setFormName] = createSignal<AuthTypes.FormName>("LOGIN");
 
   return (
     <AuthShell {...FORM_TITLES[formName()]}>
