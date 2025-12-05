@@ -1,26 +1,40 @@
 .field {
   position: relative;
-  block-size: 36px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  block-size: 34px;
+  padding-block-end: 2px;
   inline-size: min(100%, 360px);
-  align-content: end;
   font-size: 14px;
   line-height: 1;
   text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
 
-  &:has(input:user-invalid) {
+  & > button[class^="icon-"] {
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  &:has(input:user-invalid),
+  &:has(.error) {
     color: var(--primary-red);
+  }
+
+  &:has(button)::after {
+    display: none;
   }
 
   &:has(input:user-valid) {
     color: var(--primary-terracota);
 
-    &::before {
+    &::after {
       content: "\e906";
-      position: absolute;
-      inset-inline-end: 0;
-      inset-block-start: 50%;
-      transform: translateY(-50%);
       font-family: "iconfont";
+      font-size: 16px;
     }
   }
 }
@@ -28,7 +42,7 @@
 .label {
   position: absolute;
   inset-inline-start: 0;
-  inset-block-start: 16px;
+  inset-block-start: 18px;
   color: currentColor;
   transition:
     transform linear 0.1s,
@@ -46,10 +60,8 @@
 }
 
 .input {
-  block-size: 26px;
-  inline-size: 100%;
+  flex-grow: 1;
   color: currentColor;
-  border-bottom: 1px solid currentColor;
 
   &:user-valid ~ .error {
     display: none;

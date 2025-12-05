@@ -1,26 +1,17 @@
 import type { FormTypes } from "@solidjs/types";
 
-import { createUniqueId, Show } from "solid-js";
-import { createStore, produce } from "solid-js/store";
+import { Show } from "solid-js";
+
+import { useInputFieldStore } from "@solidjs/hooks";
+
+import { validate } from "@solidjs/directives";
 
 import styles from "./styles.module.css";
 
 export const InputField = (props: FormTypes.FieldProps) => {
-  const id = createUniqueId();
-
-  const [errorStore, setErrorStore] = createStore<FormTypes.FieldError>({
-    error: false,
-    errorMessage: "",
-  });
-
-  const onBlur = (e: FormTypes.FieldEvent) => {
-    setErrorStore(
-      produce((store) => {
-        store.error = !e.target.validity.valid;
-        store.errorMessage = e.target.validationMessage;
-      }),
-    );
-  };
+  const { id, fieldStore, onBlurValidate, onClickToggle } = useInputFieldStore(
+    props.type,
+  );
 
   return (
     <div class={styles.field}>
@@ -30,18 +21,31 @@ export const InputField = (props: FormTypes.FieldProps) => {
       <input
         class={styles.input}
         id={id}
-        type={props.type ?? "text"}
+        type={fieldStore.type}
         inputMode={props.inputMode ?? "text"}
         name={props.name}
         value={props.value ?? ""}
         onChange={props.onChange}
-        onBlur={onBlur}
         onInput={props.onInput}
         required={props.required}
+        pattern={props.pattern}
         placeholder={props.placeholder ?? ""}
+        use:validate={onBlurValidate}
       />
-      <Show when={errorStore.error}>
-        <span class={styles.error}>{errorStore.errorMessage}</span>
+
+      <Show when={fieldStore.error}>
+        <span class={styles.error}>{fieldStore.errorMessage}</span>
+      </Show>
+
+      <Show when={props.type === "password"}>
+        <button
+          type="button"
+          classList={{
+            "icon-show": fieldStore.type === "password",
+            "icon-hide": fieldStore.type === "text",
+          }}
+          onClick={onClickToggle}
+        />
       </Show>
     </div>
   );

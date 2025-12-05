@@ -7,7 +7,7 @@ import { InputField } from "@solidjs/components";
 
 import styles from "./styles.module.css";
 
-export const ResetForm = (props: FormTypes.FormProps) => {
+export const ConfirmForm = (props: FormTypes.FormProps) => {
   const [message, setMessage] = createSignal<string>("");
   const [disable, setDisable] = createSignal<boolean>(false);
 
@@ -25,8 +25,20 @@ export const ResetForm = (props: FormTypes.FormProps) => {
   };
 
   return (
-    <form class={styles.form} name="reset" onSubmit={onSubmit} novalidate>
-      <InputField type="email" name="email" label="email" required />
+    <form class={styles.form} name="confirm" onSubmit={onSubmit} novalidate>
+      <InputField
+        type="password"
+        name="password"
+        label="enter  password"
+        required
+      />
+
+      <InputField
+        type="password"
+        name="confirm"
+        label="confirm password"
+        required
+      />
 
       <button
         class="link"

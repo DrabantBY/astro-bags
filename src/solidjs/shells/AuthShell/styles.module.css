@@ -2,12 +2,13 @@
   max-inline-size: 792px;
   padding-inline: 20px;
   margin-inline: -20px;
-  padding-block: 120px;
+  padding-block: 80px;
   color: var(--primary-cream);
   background-color: var(--primary-black);
   border-bottom-right-radius: 160px;
 
   @media (--tablet-lg) {
+    padding-block: 120px;
     padding-inline: 90px;
     margin-inline: auto;
     border-bottom-right-radius: 240px;
@@ -38,7 +39,7 @@
 }
 
 .text {
-  inline-size: min(100%, 440px);
+  inline-size: min(100%, 450px);
   margin-inline: auto;
   font-size: 12px;
   line-height: 1.2;

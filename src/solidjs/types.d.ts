@@ -1,5 +1,13 @@
 import type { JSX, Setter } from "solid-js";
 
+declare module "solid-js" {
+  namespace JSX {
+    interface Directives {
+      validate: (error: boolean, message: string) => void;
+    }
+  }
+}
+
 export namespace FormTypes {
   type FieldMode =
     | "search"
@@ -11,7 +19,8 @@ export namespace FormTypes {
     | "numeric"
     | "decimal";
 
-  type FieldError = {
+  type FieldStore = {
+    type: string;
     error: boolean;
     errorMessage: string | undefined;
   };
@@ -28,8 +37,8 @@ export namespace FormTypes {
     pattern?: string;
     required?: boolean;
   };
-
-  type FormName = "LOGIN" | "RESET" | "SIGNUP";
+  //TODO remove CONFIRM
+  type FormName = "LOGIN" | "RESET" | "SIGNUP" | "CONFIRM";
 
   type FormProps = {
     setFormName: Setter<FormName>;

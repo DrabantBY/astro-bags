@@ -8,14 +8,17 @@ import { InputField } from "@solidjs/components";
 import styles from "./styles.module.css";
 
 export const LoginForm = (props: FormTypes.FormProps) => {
-  const [message, setMessage] = createSignal("");
+  const [message, setMessage] = createSignal<string>("");
+  const [disable, setDisable] = createSignal<boolean>(false);
 
   const onSubmit = async (e: FormTypes.FormEvent) => {
+    setDisable((prev) => !prev);
     e.preventDefault();
     const data = await AuthService.login(new FormData(e.currentTarget));
 
     if (data && data.status === "error") {
       setMessage(data.message);
+      setDisable((prev) => !prev);
       return;
     }
 
@@ -40,7 +43,7 @@ export const LoginForm = (props: FormTypes.FormProps) => {
       </Show>
 
       <div class={styles.actions}>
-        <button class="action" type="submit">
+        <button class="action" type="submit" disabled={disable()}>
           login
         </button>
 
