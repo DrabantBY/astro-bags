@@ -7,7 +7,7 @@ import { InputField } from "@solidjs/components";
 
 import styles from "@solidjs/styles.module.css";
 
-export const ConfirmForm = (props: FormTypes.FormProps) => {
+export const ActivateForm = (props: FormTypes.FormProps) => {
   const [message, setMessage] = createSignal<string>("");
   const [disable, setDisable] = createSignal<boolean>(false);
 
@@ -25,27 +25,15 @@ export const ConfirmForm = (props: FormTypes.FormProps) => {
   };
 
   return (
-    <form class={styles.form} name="confirm" onSubmit={onSubmit} novalidate>
-      <InputField
-        type="password"
-        name="password"
-        label="enter  password"
-        required
-      />
-
-      <InputField
-        type="password"
-        name="repeat"
-        label="repeat password"
-        required
-      />
+    <form class={styles.form} name="activate" onSubmit={onSubmit} novalidate>
+      <InputField type="text" name="code" label="enter code" required />
 
       <button
         class="link"
         type="button"
         onClick={() => props.setFormName("LOGIN")}
       >
-        Back to login
+        I already have an account
       </button>
 
       <Show when={message()}>
@@ -54,7 +42,7 @@ export const ConfirmForm = (props: FormTypes.FormProps) => {
 
       <div class={styles.actions}>
         <button class="action" type="submit" disabled={disable()}>
-          confirm
+          activate
         </button>
       </div>
     </form>

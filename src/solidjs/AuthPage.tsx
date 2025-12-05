@@ -4,13 +4,20 @@ import { createSignal } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import { AuthShell } from "@solidjs/shells";
-import { LoginForm, ResetForm, ConfirmForm } from "@solidjs/forms";
+import {
+  LoginForm,
+  ResetForm,
+  ConfirmForm,
+  SignupForm,
+  ActivateForm,
+} from "@solidjs/forms";
 
 const FORM_LIST: FormTypes.FormList = {
   LOGIN: LoginForm,
   RESET: ResetForm,
-  SIGNUP: ConfirmForm,
+  SIGNUP: SignupForm,
   CONFIRM: ConfirmForm,
+  ACTIVATE: ActivateForm,
 };
 
 const FORM_TITLES = {
@@ -25,13 +32,18 @@ const FORM_TITLES = {
   },
 
   SIGNUP: {
-    title: "Reset your password",
-    text: "Your password must contain at least 8 characters without spaces with letters, at least one number, one capital letter, and one special character.",
+    title: "Create an account",
+    text: "Please complete the fields below. Enter the activation code from your email.",
   },
   //TODO move to page
   CONFIRM: {
     title: "Reset your password",
     text: "Your password must contain at least 8 characters without spaces with letters, at least one number, one capital letter, and one special character.",
+  },
+
+  ACTIVATE: {
+    title: "Account activation",
+    text: "Please enter the activation code you just received by email",
   },
 };
 

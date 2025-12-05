@@ -7,45 +7,38 @@ import { InputField } from "@solidjs/components";
 
 import styles from "@solidjs/styles.module.css";
 
-export const ConfirmForm = (props: FormTypes.FormProps) => {
+export const SignupForm = (props: FormTypes.FormProps) => {
   const [message, setMessage] = createSignal<string>("");
   const [disable, setDisable] = createSignal<boolean>(false);
 
   const onSubmit = async (e: FormTypes.FormEvent) => {
     setDisable((prev) => !prev);
     e.preventDefault();
-    //TODO add new query
-    const data = await AuthService.login(new FormData(e.currentTarget));
+    props.setFormName("ACTIVATE");
 
-    if (data && data.status === "error") {
-      setMessage(data.message);
-      setDisable((prev) => !prev);
-      return;
-    }
+    // const data = await AuthService.login(new FormData(e.currentTarget));
+    //
+    // if (data && data.status === "error") {
+    //   setMessage(data.message);
+    //   setDisable((prev) => !prev);
+    //   return;
+    // }
+    //
+    // window.location.href = "/";
   };
 
   return (
-    <form class={styles.form} name="confirm" onSubmit={onSubmit} novalidate>
-      <InputField
-        type="password"
-        name="password"
-        label="enter  password"
-        required
-      />
-
-      <InputField
-        type="password"
-        name="repeat"
-        label="repeat password"
-        required
-      />
+    <form class={styles.form} name="signup" onSubmit={onSubmit} novalidate>
+      <InputField type="text" name="username" label="username" required />
+      <InputField type="email" name="email" label="email" required />
+      <InputField type="password" name="password" label="password" required />
 
       <button
         class="link"
         type="button"
         onClick={() => props.setFormName("LOGIN")}
       >
-        Back to login
+        I already have an account
       </button>
 
       <Show when={message()}>
@@ -54,7 +47,7 @@ export const ConfirmForm = (props: FormTypes.FormProps) => {
 
       <div class={styles.actions}>
         <button class="action" type="submit" disabled={disable()}>
-          confirm
+          get code
         </button>
       </div>
     </form>

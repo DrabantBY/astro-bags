@@ -38,7 +38,7 @@ export namespace FormTypes {
     required?: boolean;
   };
   //TODO remove CONFIRM
-  type FormName = "LOGIN" | "RESET" | "SIGNUP" | "CONFIRM";
+  type FormName = "LOGIN" | "RESET" | "SIGNUP" | "CONFIRM" | "ACTIVATE";
 
   type FormProps = {
     setFormName: Setter<FormName>;
