@@ -2,7 +2,7 @@ import type { FormTypes } from "@solidjs/types";
 
 import { createStore, produce } from "solid-js/store";
 
-import { createUniqueId } from "solid-js";
+import { createSelector, createUniqueId } from "solid-js";
 
 export const useInputFieldStore = (type: string = "text") => {
   const id = createUniqueId();
@@ -12,6 +12,8 @@ export const useInputFieldStore = (type: string = "text") => {
     error: false,
     errorMessage: "",
   });
+
+  const hasType = createSelector(() => fieldStore.type);
 
   const onBlurValidate = (error: boolean, message: string) => {
     setFieldStore(
@@ -30,5 +32,12 @@ export const useInputFieldStore = (type: string = "text") => {
     );
   };
 
-  return { id, fieldStore, setFieldStore, onBlurValidate, onClickToggle };
+  return {
+    id,
+    hasType,
+    fieldStore,
+    setFieldStore,
+    onBlurValidate,
+    onClickToggle,
+  };
 };
