@@ -54,7 +54,7 @@ export const ConfirmForm = (props: AuthTypes.FormProps) => {
       </Show>
 
       <div class={styles.actions}>
-        <button class="action" type="submit" disabled={disable()}>
+        <button class="action-contain" type="submit" disabled={disable()}>
           confirm
         </button>
       </div>

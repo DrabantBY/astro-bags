@@ -30,7 +30,8 @@ export const SignupForm = (props: AuthTypes.FormProps) => {
 
   return (
     <form class={styles.form} name="signup" onSubmit={onSubmit} novalidate>
-      <InputField type="text" name="username" label="username" required />
+      <InputField type="text" name="firstname" label="first name" required />
+      <InputField type="text" name="firstname" label="last name" required />
       <InputField type="email" name="email" label="email" required />
       <InputField type="password" name="password" label="password" required />
 
@@ -47,7 +48,7 @@ export const SignupForm = (props: AuthTypes.FormProps) => {
       </Show>
 
       <div class={styles.actions}>
-        <button class="action" type="submit" disabled={disable()}>
+        <button class="action-contain" type="submit" disabled={disable()}>
           get code
         </button>
       </div>

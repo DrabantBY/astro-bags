@@ -56,12 +56,16 @@ export const LoginForm = (props: AuthTypes.FormProps) => {
       </Show>
 
       <div class={styles.actions}>
-        <button class="action" type="submit" disabled={formStore.pending}>
+        <button
+          class="action-contain"
+          type="submit"
+          disabled={formStore.pending}
+        >
           login
         </button>
 
         <button
-          class="action"
+          class="action-outline"
           type="button"
           onClick={() => props.setFormName("SIGNUP")}
         >

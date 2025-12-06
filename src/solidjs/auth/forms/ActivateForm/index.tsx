@@ -42,7 +42,7 @@ export const ActivateForm = (props: AuthTypes.FormProps) => {
       </Show>
 
       <div class={styles.actions}>
-        <button class="action" type="submit" disabled={disable()}>
+        <button class="action-contain" type="submit" disabled={disable()}>
           activate
         </button>
       </div>

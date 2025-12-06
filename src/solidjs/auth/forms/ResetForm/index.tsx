@@ -1,4 +1,5 @@
 import type { AuthTypes } from "@solidjs/auth/types";
+import type { FormTypes } from "@solidjs/types";
 
 import { createSignal, Show } from "solid-js";
 
@@ -41,7 +42,7 @@ export const ResetForm = (props: AuthTypes.FormProps) => {
       </Show>
 
       <div class={styles.actions}>
-        <button class="action" type="submit" disabled={disable()}>
+        <button class="action-contain" type="submit" disabled={disable()}>
           confirm
         </button>
       </div>
