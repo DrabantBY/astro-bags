@@ -27,7 +27,7 @@ import Header from "@templates/Header.astro";
   :root {
     box-sizing: border-box;
     scroll-behavior: smooth;
-    /*scrollbar-width: none;*/
+    scrollbar-gutter: stable;
     interpolate-size: allow-keywords;
     user-select: none;
 
@@ -63,10 +63,6 @@ import Header from "@templates/Header.astro";
 
   body {
     font-family: var(--font-maison-mono);
-
-    &:has(dialog[open]) {
-      overflow: hidden;
-    }
   }
 
   #root {

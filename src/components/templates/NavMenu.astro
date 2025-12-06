@@ -49,7 +49,7 @@ const { pathname } = Astro.url;
     padding-inline: 10px;
     color: var(--primary-white);
     background-color: var(--primary-black);
-    border-top-right-radius: 190px;
+    border-top-right-radius: 170px;
     transform: translateX(-100%);
     transition:
       transform 0.3s,
@@ -76,7 +76,7 @@ const { pathname } = Astro.url;
     padding-block-start: 80px;
     padding-block-end: 30px;
     border: 2px solid currentColor;
-    border-top-right-radius: 180px;
+    border-top-right-radius: 160px;
     text-align: center;
 
     & > button {
@@ -107,18 +107,14 @@ const { pathname } = Astro.url;
         inset-block-start: 50%;
         transform: translateY(-50%);
         font-family: var(--font-maison-mono);
-        font-size: 10px;
+        font-size: 14px;
         text-transform: uppercase;
-
-        @media (--tablet-lg) {
-          content: "(you are here)";
-          font-size: 14px;
-        }
       }
     }
 
     li:hover:not(.active) {
-      color: var(--secondary-black);
+      color: var(--primary-black);
+      background-color: var(--primary-cream);
     }
 
     li.active::before {
@@ -127,17 +123,13 @@ const { pathname } = Astro.url;
 
     li + li {
       margin-block-start: 8px;
-
-      @media (--tablet-lg) {
-        margin-block-start: 16px;
-      }
     }
   }
 
   .nav-menu-social {
     margin-block-start: 80px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     font-size: 12px;
     text-transform: uppercase;
     border: 1px solid currentColor;
@@ -147,7 +139,7 @@ const { pathname } = Astro.url;
       align-content: center;
 
       &:hover {
-        color: var(--secondary-black);
+        color: var(--primary-black);
         background-color: var(--primary-cream);
       }
     }
@@ -176,44 +168,6 @@ const { pathname } = Astro.url;
   }
 
   @media (--tablet-lg) {
-    #nav-menu {
-      inline-size: min(94%, 840px);
-      max-inline-size: min(94%, 840px);
-      padding-block: 24px;
-      padding-inline: 24px;
-      border-top-right-radius: 384px;
-    }
-
-    .nav-menu-body {
-      padding-block-start: 140px;
-      padding-inline: 90px;
-      padding-block-end: 40px;
-      border-top-right-radius: 360px;
-
-      & > button {
-        font-size: 14px;
-      }
-    }
-
-    .nav-menu-social {
-      margin-block-start: 96px;
-
-      font-size: 14px;
-
-      & > li {
-        block-size: 50px;
-      }
-
-      li + li {
-        border-left: 1px solid currentColor;
-      }
-
-      li:last-child,
-      li:has(+ li:last-child) {
-        border-top: initial;
-      }
-    }
-
     .icon-burger {
       inline-size: fit-content;
       font-size: 24px;
