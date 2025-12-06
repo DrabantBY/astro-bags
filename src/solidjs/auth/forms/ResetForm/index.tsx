@@ -27,7 +27,14 @@ export const ResetForm = (props: AuthTypes.FormProps) => {
 
   return (
     <form class={styles.form} name="reset" onSubmit={onSubmit} novalidate>
-      <InputField type="email" name="email" label="email" required />
+      <InputField
+        type="email"
+        name="email"
+        label="email"
+        required
+        pattern="[\w\d]{3,}@[a-z]{2,}\.[a-z]+"
+        patternErrorMessage="value is not an email"
+      />
 
       <button
         class="link"

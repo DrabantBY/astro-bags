@@ -30,10 +30,38 @@ export const SignupForm = (props: AuthTypes.FormProps) => {
 
   return (
     <form class={styles.form} name="signup" onSubmit={onSubmit} novalidate>
-      <InputField type="text" name="firstname" label="first name" required />
-      <InputField type="text" name="firstname" label="last name" required />
-      <InputField type="email" name="email" label="email" required />
-      <InputField type="password" name="password" label="password" required />
+      <InputField
+        type="text"
+        name="firstname"
+        label="first name"
+        required
+        pattern="[a-zA-Z]{2,}"
+        patternErrorMessage="min 2 letters without spaces"
+      />
+      <InputField
+        type="text"
+        name="firstname"
+        label="last name"
+        required
+        pattern="[a-zA-Z]{2,}"
+        patternErrorMessage="min 2 letters without spaces"
+      />
+      <InputField
+        type="email"
+        name="email"
+        label="email"
+        required
+        pattern="[\w\d]{3,}@[a-z]{2,}\.[a-z]+"
+        patternErrorMessage="value is not an email"
+      />
+      <InputField
+        type="password"
+        name="password"
+        label="password"
+        required
+        pattern=".{4,}"
+        patternErrorMessage="min 4 characters"
+      />
 
       <button
         class="link"

@@ -32,6 +32,8 @@ export const ConfirmForm = (props: AuthTypes.FormProps) => {
         name="password"
         label="enter  password"
         required
+        pattern=".{4,}"
+        patternErrorMessage="min 4 characters"
       />
 
       <InputField
@@ -39,6 +41,8 @@ export const ConfirmForm = (props: AuthTypes.FormProps) => {
         name="repeat"
         label="repeat password"
         required
+        pattern=".{4,}"
+        patternErrorMessage="min 4 characters"
       />
 
       <button

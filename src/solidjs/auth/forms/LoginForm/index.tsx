@@ -22,6 +22,7 @@ export const LoginForm = (props: AuthTypes.FormProps) => {
       }),
     );
     e.preventDefault();
+
     const data = await AuthService.login(new FormData(e.currentTarget));
 
     if (data && data.status === "error") {
@@ -40,8 +41,22 @@ export const LoginForm = (props: AuthTypes.FormProps) => {
 
   return (
     <form class={styles.form} name="login" onSubmit={onSubmit} novalidate>
-      <InputField type="email" name="login" label="email" required />
-      <InputField type="password" name="password" label="password" required />
+      <InputField
+        type="email"
+        name="login"
+        label="email"
+        required
+        pattern="[\w\d]{3,}@[a-z]{2,}\.[a-z]+"
+        patternErrorMessage="value is not an email"
+      />
+      <InputField
+        type="password"
+        name="password"
+        label="password"
+        required
+        pattern=".{4,}"
+        patternErrorMessage="min 4 characters"
+      />
 
       <button
         class="link"

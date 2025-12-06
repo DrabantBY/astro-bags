@@ -29,7 +29,11 @@ export const InputField = (props: FormTypes.FieldProps) => {
         required={props.required}
         pattern={props.pattern}
         placeholder={props.placeholder ?? ""}
-        use:validate={onBlurValidate}
+        use:validate={{
+          callback: onBlurValidate,
+          patternMessage: props.patternErrorMessage,
+          requiredMessage: props.requiredErrorMessage,
+        }}
       />
 
       <Show when={fieldStore.error}>

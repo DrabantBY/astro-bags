@@ -1,7 +1,11 @@
 declare module "solid-js" {
   namespace JSX {
     interface Directives {
-      validate: (error: boolean, message: string) => void;
+      validate: {
+        callback: (error: boolean, message: string) => void;
+        patternMessage?: string;
+        requiredMessage?: string;
+      };
     }
   }
 }
@@ -34,6 +38,8 @@ export namespace FormTypes {
     onInput?: () => void;
     pattern?: string;
     required?: boolean;
+    patternErrorMessage?: string;
+    requiredErrorMessage?: string;
   };
 
   type FieldEvent = Event & {
