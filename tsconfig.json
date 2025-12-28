@@ -5,7 +5,7 @@
       "@const/*": ["./src/const/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@templates/*": ["./src/components/templates/*"],
-      "@auth/*": ["./src/auth/*"],
+      "@auth/*": ["./src/solidjs/auth/*"],
       "@solidjs/*": ["./src/solidjs/*"]
     },
     "jsx": "preserve",

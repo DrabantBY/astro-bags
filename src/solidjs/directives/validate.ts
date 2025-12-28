@@ -2,21 +2,31 @@ import type { Accessor } from "solid-js";
 
 export const validate = (
   el: HTMLInputElement,
-  handleEvent: Accessor<(error: boolean, message: string) => void>,
+  data: Accessor<{
+    callback: (error: boolean, message: string) => void;
+    patternMessage?: string;
+    requiredMessage?: string;
+  }>,
 ) => {
   el.addEventListener("blur", function () {
+    const { callback, patternMessage, requiredMessage } = data();
+
     let message = "";
 
     if (this.validity.valueMissing) {
-      message = `${this.name} is required`;
+      message = requiredMessage ?? `${this.name} is required`;
     } else if (this.validity.patternMismatch) {
-      message = `${this.name} has invalid value`;
-    } else if (this.validity.typeMismatch) {
-      message = `${this.name} has invalid ${this.type} type`;
+      message = patternMessage ?? `${this.name} has invalid value`;
+    } else if (
+      this.name.includes("repeat") &&
+      this.value !==
+        (this.form?.elements?.namedItem("password") as HTMLInputElement).value
+    ) {
+      message = `password doesn't match`;
     }
 
     this.setCustomValidity(message);
 
-    handleEvent()(!this.validity.valid, this.validationMessage);
+    callback(this.validity.customError, this.validationMessage);
   });
 };

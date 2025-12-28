@@ -9,9 +9,8 @@ import { validate } from "@solidjs/directives";
 import styles from "./styles.module.css";
 
 export const InputField = (props: FormTypes.FieldProps) => {
-  const { id, fieldStore, onBlurValidate, onClickToggle } = useInputFieldStore(
-    props.type,
-  );
+  const { id, hasType, fieldStore, onBlurValidate, onClickToggle } =
+    useInputFieldStore(props.type);
 
   return (
     <div class={styles.field}>
@@ -30,7 +29,11 @@ export const InputField = (props: FormTypes.FieldProps) => {
         required={props.required}
         pattern={props.pattern}
         placeholder={props.placeholder ?? ""}
-        use:validate={onBlurValidate}
+        use:validate={{
+          callback: onBlurValidate,
+          patternMessage: props.patternErrorMessage,
+          requiredMessage: props.requiredErrorMessage,
+        }}
       />
 
       <Show when={fieldStore.error}>
@@ -41,8 +44,8 @@ export const InputField = (props: FormTypes.FieldProps) => {
         <button
           type="button"
           classList={{
-            "icon-show": fieldStore.type === "password",
-            "icon-hide": fieldStore.type === "text",
+            "icon-show": hasType("password"),
+            "icon-hide": hasType("text"),
           }}
           onClick={onClickToggle}
         />

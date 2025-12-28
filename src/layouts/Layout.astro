@@ -27,7 +27,7 @@ import Header from "@templates/Header.astro";
   :root {
     box-sizing: border-box;
     scroll-behavior: smooth;
-    /*scrollbar-width: none;*/
+    //scrollbar-gutter: stable;
     interpolate-size: allow-keywords;
     user-select: none;
 
@@ -63,10 +63,6 @@ import Header from "@templates/Header.astro";
 
   body {
     font-family: var(--font-maison-mono);
-
-    &:has(dialog[open]) {
-      overflow: hidden;
-    }
   }
 
   #root {
@@ -198,26 +194,39 @@ import Header from "@templates/Header.astro";
     }
   }
 
-  .action {
+  .action-contain,
+  .action-outline {
     display: block;
-    inline-size: 216px;
+    inline-size: 200px;
     block-size: 40px;
     align-content: center;
     font-family: var(--font-maison-light);
     font-size: 14px;
     text-transform: uppercase;
+    border-radius: 20px;
+
+    &:hover:not(:disabled) {
+      opacity: 0.8;
+    }
+  }
+
+  .action-contain {
+    color: var(--primary-cream);
+    background-color: var(--primary-terracota);
+    border: 1px solid var(--primary-terracota);
+
+    &:disabled {
+      background-color: var(--secondary-black);
+      border: 1px solid var(--secondary-black);
+    }
+  }
+
+  .action-outline {
     color: var(--primary-terracota);
     border: 1px solid currentColor;
-    border-radius: 20px;
 
     &:disabled {
       color: var(--secondary-black);
-    }
-
-    &:hover:not(:disabled) {
-      color: var(--primary-cream);
-      background-color: var(--primary-terracota);
-      border-color: var(--primary-terracota);
     }
   }
 

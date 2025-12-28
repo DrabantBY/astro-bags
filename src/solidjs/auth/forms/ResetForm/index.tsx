@@ -1,3 +1,4 @@
+import type { AuthTypes } from "@solidjs/auth/types";
 import type { FormTypes } from "@solidjs/types";
 
 import { createSignal, Show } from "solid-js";
@@ -5,9 +6,9 @@ import { createSignal, Show } from "solid-js";
 import { AuthService } from "@auth/services";
 import { InputField } from "@solidjs/components";
 
-import styles from "./styles.module.css";
+import styles from "@solidjs/auth/styles.module.css";
 
-export const ResetForm = (props: FormTypes.FormProps) => {
+export const ResetForm = (props: AuthTypes.FormProps) => {
   const [message, setMessage] = createSignal<string>("");
   const [disable, setDisable] = createSignal<boolean>(false);
 
@@ -26,7 +27,14 @@ export const ResetForm = (props: FormTypes.FormProps) => {
 
   return (
     <form class={styles.form} name="reset" onSubmit={onSubmit} novalidate>
-      <InputField type="email" name="email" label="email" required />
+      <InputField
+        type="email"
+        name="email"
+        label="email"
+        required
+        pattern="[\w\d]{3,}@[a-z]{2,}\.[a-z]+"
+        patternErrorMessage="value is not an email"
+      />
 
       <button
         class="link"
@@ -41,7 +49,7 @@ export const ResetForm = (props: FormTypes.FormProps) => {
       </Show>
 
       <div class={styles.actions}>
-        <button class="action" type="submit" disabled={disable()}>
+        <button class="action-contain" type="submit" disabled={disable()}>
           confirm
         </button>
       </div>

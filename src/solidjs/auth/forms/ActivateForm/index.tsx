@@ -1,13 +1,14 @@
 import type { FormTypes } from "@solidjs/types";
+import type { AuthTypes } from "@solidjs/auth/types";
 
 import { createSignal, Show } from "solid-js";
 
 import { AuthService } from "@auth/services";
 import { InputField } from "@solidjs/components";
 
-import styles from "./styles.module.css";
+import styles from "@solidjs/auth/styles.module.css";
 
-export const ConfirmForm = (props: FormTypes.FormProps) => {
+export const ActivateForm = (props: AuthTypes.FormProps) => {
   const [message, setMessage] = createSignal<string>("");
   const [disable, setDisable] = createSignal<boolean>(false);
 
@@ -25,27 +26,15 @@ export const ConfirmForm = (props: FormTypes.FormProps) => {
   };
 
   return (
-    <form class={styles.form} name="confirm" onSubmit={onSubmit} novalidate>
-      <InputField
-        type="password"
-        name="password"
-        label="enter  password"
-        required
-      />
-
-      <InputField
-        type="password"
-        name="confirm"
-        label="confirm password"
-        required
-      />
+    <form class={styles.form} name="activate" onSubmit={onSubmit} novalidate>
+      <InputField type="text" name="code" label="enter code" required />
 
       <button
         class="link"
         type="button"
         onClick={() => props.setFormName("LOGIN")}
       >
-        Back to login
+        I already have an account
       </button>
 
       <Show when={message()}>
@@ -53,8 +42,8 @@ export const ConfirmForm = (props: FormTypes.FormProps) => {
       </Show>
 
       <div class={styles.actions}>
-        <button class="action" type="submit" disabled={disable()}>
-          confirm
+        <button class="action-contain" type="submit" disabled={disable()}>
+          activate
         </button>
       </div>
     </form>

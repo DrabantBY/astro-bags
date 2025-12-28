@@ -1,12 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { AuthPage } from "@solidjs/AuthPage.tsx";
+import { AuthPage } from "@solidjs/auth";
 ---
 
 <Layout>
-  <section>
-    <div class="__container">
-      <AuthPage client:only="solid-js" />
-    </div>
-  </section>
+  <AuthPage client:only="solid-js" />
 </Layout>
