@@ -15,37 +15,21 @@ export const SignupForm = (props: AuthTypes.FormProps) => {
   const onSubmit = async (e: FormTypes.FormEvent) => {
     setDisable((prev) => !prev);
     e.preventDefault();
-    props.setFormName("ACTIVATE");
+    // props.setFormName("ACTIVATE");
 
-    // const data = await AuthService.login(new FormData(e.currentTarget));
-    //
-    // if (data && data.status === "error") {
-    //   setMessage(data.message);
-    //   setDisable((prev) => !prev);
-    //   return;
-    // }
-    //
-    // window.location.href = "/";
+    const data = await AuthService.signup(new FormData(e.currentTarget));
+
+    if (data && data.status === "error") {
+      setMessage(data.message);
+      setDisable((prev) => !prev);
+      return;
+    }
+
+    props.setInfoNote(data.message);
   };
 
   return (
     <form class={styles.form} name="signup" onSubmit={onSubmit} novalidate>
-      <InputField
-        type="text"
-        name="firstname"
-        label="first name"
-        required
-        pattern="[a-zA-Z]{2,}"
-        patternErrorMessage="min 2 letters without spaces"
-      />
-      <InputField
-        type="text"
-        name="firstname"
-        label="last name"
-        required
-        pattern="[a-zA-Z]{2,}"
-        patternErrorMessage="min 2 letters without spaces"
-      />
       <InputField
         type="email"
         name="email"
@@ -58,6 +42,15 @@ export const SignupForm = (props: AuthTypes.FormProps) => {
         type="password"
         name="password"
         label="password"
+        required
+        pattern=".{4,}"
+        patternErrorMessage="min 4 characters"
+      />
+
+      <InputField
+        type="password"
+        name="passwordrepeat"
+        label="repeat password"
         required
         pattern=".{4,}"
         patternErrorMessage="min 4 characters"
@@ -77,7 +70,7 @@ export const SignupForm = (props: AuthTypes.FormProps) => {
 
       <div class={styles.actions}>
         <button class="action-contain" type="submit" disabled={disable()}>
-          get code
+          create
         </button>
       </div>
     </form>

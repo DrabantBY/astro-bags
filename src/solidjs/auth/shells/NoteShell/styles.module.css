@@ -1,0 +1,15 @@
+.noteSection {
+  flex-grow: 1;
+  align-content: center;
+  background-color: var(--primary-cream);
+  block-size: calc(100dvh - 100px);
+}
+
+.noteTitle {
+  margin-inline: auto;
+  font-family: var(--font-flecha);
+  font-size: 48px;
+  text-align: center;
+  text-wrap: pretty;
+  color: var(--primary-terracota);
+}

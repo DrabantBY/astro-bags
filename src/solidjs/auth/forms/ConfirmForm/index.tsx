@@ -30,7 +30,7 @@ export const ConfirmForm = (props: AuthTypes.FormProps) => {
       <InputField
         type="password"
         name="password"
-        label="enter  password"
+        label="enter password"
         required
         pattern=".{4,}"
         patternErrorMessage="min 4 characters"

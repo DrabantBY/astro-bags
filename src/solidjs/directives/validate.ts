@@ -18,7 +18,7 @@ export const validate = (
     } else if (this.validity.patternMismatch) {
       message = patternMessage ?? `${this.name} has invalid value`;
     } else if (
-      this.name === "repeat" &&
+      this.name.includes("repeat") &&
       this.value !==
         (this.form?.elements?.namedItem("password") as HTMLInputElement).value
     ) {

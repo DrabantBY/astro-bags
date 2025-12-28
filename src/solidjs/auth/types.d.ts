@@ -6,6 +6,7 @@ export namespace AuthTypes {
 
   type FormProps = {
     setFormName: Setter<FormName>;
+    setInfoNote: Setter<string>;
   };
 
   type FormList = Record<FormName, (props: FormProps) => JSX.Element>;

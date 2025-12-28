@@ -1,6 +1,6 @@
 import type { AuthTypes } from "./types";
 
-import { createSignal } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import {
@@ -11,7 +11,7 @@ import {
   ActivateForm,
 } from "./forms";
 
-import { AuthShell } from "./shells";
+import { AuthShell, NoteShell } from "./shells";
 
 const FORM_LIST: AuthTypes.FormList = {
   LOGIN: LoginForm,
@@ -50,10 +50,17 @@ const FORM_TITLES = {
 
 export const AuthPage = () => {
   const [formName, setFormName] = createSignal<AuthTypes.FormName>("LOGIN");
+  const [note, setNote] = createSignal<string>("");
 
   return (
-    <AuthShell {...FORM_TITLES[formName()]}>
-      <Dynamic component={FORM_LIST[formName()]} setFormName={setFormName} />
-    </AuthShell>
+    <Show when={!note()} fallback={<NoteShell note={note()} />}>
+      <AuthShell {...FORM_TITLES[formName()]}>
+        <Dynamic
+          component={FORM_LIST[formName()]}
+          setFormName={setFormName}
+          setInfoNote={setNote}
+        />
+      </AuthShell>
+    </Show>
   );
 };
